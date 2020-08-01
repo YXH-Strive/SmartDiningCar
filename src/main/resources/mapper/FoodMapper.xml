@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yxh.mapper.FoodMapper">
+    <select id="initMenu">
+        select * from `foods`;
+    </select>
+
+    <select id="initSignFoods">
+        select food_id,icon,name from `foods` order by RAND() LIMIT ${num};
+    </select>
+
+    <select id="getLikeFoods">
+        select * from `foods` where food_id in
+        <foreach item="item" index="index" collection="likeFoodsIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>
